@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package dummy_1;
+
+option go_package = ".;pb";
+
+import "annotations/annotations.proto";
+import "recaptcha/recaptcha.proto";
+
+service Dummy1 {
+  rpc GetDummy1Method1(GetDummy1Method1Request) returns (Dummy1Method1Object) {
+    option (google.api.http) = {
+      get: "/v1/dummy-1/method-1/{id=**}"
+    };
+    option (recaptcha.require_recaptcha) = true;
+  }
+
+  rpc GetDummy1Method2(GetDummy1Method2Request) returns (Dummy1Method2Object) {
+    option (google.api.http) = {
+      get: "/v1/dummy-1/method-2/{id=**}"
+    };
+  }
+}
+
+message Dummy1Method1Object {
+  string id = 1;
+  string name = 2;
+};
+
+message GetDummy1Method1Request {
+  string id = 1;
+}
+
+message Dummy1Method2Object {
+  string id = 1;
+  string name = 2;
+};
+
+message GetDummy1Method2Request {
+  string id = 1;
+}
